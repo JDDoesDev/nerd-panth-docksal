@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+#: exec_target = cli
+
+## Run deployment
+
+set -e
+
+/var/www/vendor/bin/blt artifact:deploy --commit-msg "Automated commit by Bamboo CI for Build ${GIT_COMMIT_HASH}" --branch "${GIT_BRANCH_NAME}-build" --ignore-dirty --no-interaction --verbose

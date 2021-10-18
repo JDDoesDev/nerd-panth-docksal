@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+## Run BLT setup for a site(s).
+##
+## Usage: fin install-profiles [site1] [site2] ... [siteN]
+
+# Abort if anything fails.
+set -e
+
+BLT_ENVIRONMENT=${SECRET_BLT_ENVIRONMENT:-local}
+
+cd $PROJECT_ROOT
+
+# Ensure the blt alias is setup in CLI.
+fin exec /var/www/vendor/bin/blt blt:init:shell-alias --no-interaction
+
+if [[ $# -eq 0 || -z "$@" ]]; then
+    SITES=($PROJECT_ROOT/docroot/sites/default/)
+else
+    SITES=( "$@" )
+fi
