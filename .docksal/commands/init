@@ -26,8 +26,8 @@ init-folders () {
   if [ ! -d ${PROJECT_ROOT}/vendor ]; then
     mkdir ${PROJECT_ROOT}/vendor
   fi
-  if [ ! -d ${PROJECT_ROOT}/web/modules/composer ]; then
-    mkdir ${PROJECT_ROOT}/web/modules/composer
+  if [ ! -d ${PROJECT_ROOT}/web/modules/contrib ]; then
+    mkdir ${PROJECT_ROOT}/web/modules/contrib
   fi
 }
 
@@ -77,7 +77,7 @@ else
   echo "Installing new site from existing config. No content will exist on this site. To sync with an existing site on Pantheon, please get your Terminus token and add it to docksal-local.yml."
   fin drush site-install standard -y \
     --root="${PROJECT_ROOT}/web/" \
-    --site-name="GTI Nevada"
+    --site-name="${SITE_NAME:-Default site}"
   fin drush cim -y
 fi
 

@@ -1,11 +1,9 @@
-version: "2.1"
+version: "3.9"
 services:
   cli:
-    image: ${COMPOSE_PROJECT_NAME_SAFE}_cli
-    build: ${PROJECT_ROOT}/.docksal/services/cli
     volumes:
-      - culturelle_drupal_composer_packages:/var/www/vendor
-      - culturelle_drupal_contrib:/var/www/web/modules/composer
+      - drupal_composer_packages:/var/www/vendor
+      - drupal_contrib_modules:/var/www/web/modules/contrib
     environment:
       - DOCKSAL_ENV=true
       - DRUSH_OPTIONS_URI=${VIRTUAL_HOST}
@@ -15,8 +13,6 @@ services:
   varnish:
     labels:
       - io.docksal.virtual-host=varnish.${VIRTUAL_HOST},varnish.${VIRTUAL_HOST}.*,www.varnish.${VIRTUAL_HOST},www.varnish.${VIRTUAL_HOST}.*
-  solr:
-    image: docksal/solr:8.1
 volumes:
-  culturelle_drupal_composer_packages:
-  culturelle_drupal_contrib:
+  drupal_composer_packages:
+  drupal_contrib_modules:
